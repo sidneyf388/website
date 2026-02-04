@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<!-- OK SO THIS IS MY WEBSITE - SIDNEY FRY - CS STUDENT -->
-<!-- i hope this works lol. i spent like 3 hours on this part -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidney's Website thingy</title>
-    <!-- tailwind thing my friend told me to use -->
+    <title>Sidney's Website</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- icons from lucide or whatever it is called -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
@@ -18,10 +14,9 @@
             font-family: 'Inter', sans-serif !important;
             scroll-behavior: smooth;
             overflow-x: hidden;
-            background-color: #f8fafc; /* light gray ish */
+            background-color: #f8fafc;
         }
 
-        /* make the boxes look like glass? i think? */
         .glass_effect_v1 {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
@@ -29,7 +24,6 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* the blue dot background thing */
         .dots_bg_final_final {
             background-image: radial-gradient(#3b82f6 0.5px, transparent 0.5px);
             background-size: 24px 24px;
@@ -37,39 +31,33 @@
             mask-image: linear-gradient(to bottom, white, transparent);
         }
 
-        /* text with colors */
         .cool_text_gradient {
             background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* photo moving up and down */
         @keyframes floaty_thing {
             0% { transform: translateY(0px) rotate(3deg); }
             50% { transform: translateY(-15px) rotate(1deg); }
             100% { transform: translateY(0px) rotate(3deg); }
         }
         
-        /* apply the move thing */
         .my_photo_animation {
             animation: floaty_thing 5s ease-in-out infinite;
         }
 
-        /* stuff appearing when scrolling down */
         .reveal_div {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        /* this class gets added by javascript later i think */
         .reveal_div.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* skill boxes */
         .skill_box_hover {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -79,7 +67,6 @@
             border-color: #3b82f6;
         }
 
-        /* blue button glow */
         .shiny_btn {
             transition: all 0.3s ease;
             position: relative;
@@ -89,7 +76,6 @@
             box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
         }
 
-        /* scrollbar looks weird so i found this code online */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -104,7 +90,6 @@
             background: #94a3b8;
         }
 
-        /* helper classes because i dont want to type tailwind every time */
         .nav_fixed { position: fixed; top: 0; width: 100%; z-index: 50; }
         .flex_center { display: flex; justify-content: center; align-items: center; }
         .section_padding { padding-top: 6rem; padding-bottom: 6rem; }
@@ -112,33 +97,28 @@
 </head>
 <body class="bg-slate-50 text-slate-900">
 
-    <!-- NAVIGATION PART -->
     <nav class="nav_fixed glass_effect_v1 border-b border-slate-200/50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-xl font-bold cool_text_gradient tracking-tight">Sidney Fry</a>
-            <!-- Desktop menu stuff -->
             <div class="hidden md:flex space-x-8 font-medium">
                 <a href="#home" class="hover:text-blue-600 transition-colors">Home</a>
                 <a href="#projects" class="hover:text-blue-600 transition-colors">Projects</a>
                 <a href="#skills" class="hover:text-blue-600 transition-colors">Skills</a>
+                <a href="https://github.com/sidneyf388" target="_blank" class="hover:text-blue-600 transition-colors flex items-center gap-1">GitHub <i data-lucide="github" class="w-4 h-4"></i></a>
                 <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
             </div>
-            <!-- this is for phones i guess -->
             <div class="md:hidden">
-                <button onclick="console.log('menu clicked')"><i data-lucide="menu"></i></button>
+                <button><i data-lucide="menu"></i></button>
             </div>
         </div>
     </nav>
 
-    <!-- HEADER / HERO STUFF -->
     <section id="home" class="relative pt-40 pb-24 px-6 overflow-hidden">
-        <!-- background colors and dots -->
         <div class="absolute inset-0 dots_bg_final_final opacity-30"></div>
         <div class="absolute top-20 -left-20 w-80 h-80 bg-blue-200/40 blur-[100px] rounded-full"></div>
         <div class="absolute bottom-0 -right-20 w-80 h-80 bg-purple-200/40 blur-[100px] rounded-full"></div>
         
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
-            <!-- left side text -->
             <div class="flex-1 text-center md:text-left reveal_div">
                 <h1 class="text-5xl md:text-7xl font-black mb-6 leading-[1.1] tracking-tight text-slate-900">
                     I'm <span class="cool_text_gradient">Sidney Fry</span>,<br>a CS Student.
@@ -146,7 +126,6 @@
                 <p class="text-slate-600 text-lg md:text-xl mb-10 leading-relaxed max-w-xl font-medium">
                     I am an aspiring Cyber Security professional currently studying Computer Science at the University of Leicester. I am passionate about securing digital infrastructures and building resilient systems.
                 </p>
-                <!-- buttons -->
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
                     <a href="#projects" class="shiny_btn bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center gap-2 shadow-lg shadow-blue-200 hover:-translate-y-1 transition-all">
                         View Projects <i data-lucide="arrow-right" class="w-5 h-5"></i>
@@ -157,26 +136,22 @@
                 </div>
             </div>
 
-            <!-- right side photo -->
             <div class="flex-1 flex justify-center reveal_div">
                 <div class="relative">
                     <div class="w-64 h-64 md:w-96 md:h-96 rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] my_photo_animation bg-white border-8 border-white">
-                        <!-- this link is really long i hope it doesnt break -->
                         <img 
                             src="https://lh3.googleusercontent.com/pw/AP1GczMdDlNoE242G2EF4xFZ43_ZoSDtoRn-3lLZF85eKDp6l-LFFOXOukFSISMCwEVS2fUjml8GePlDP13X_AFSbyxSW42mcxYhv-rrSgA0HMBG96U0gB9VpavkYJ8XX1ViERG7qMaYFWmq4Kl92cpYrXtEug=w1259-h945-s-no-gm" 
                             alt="Sidney Fry Photo" 
                             class="w-full h-full object-cover transition-all duration-700"
-                            onerror="console.log('photo error'); this.src='https://via.placeholder.com/400x400?text=Fix+The+Link'"
+                            onerror="this.src='https://via.placeholder.com/400x400?text=Sidney+Fry'"
                         >
                     </div>
-                    <!-- rotating dotty thing -->
                     <div class="absolute -inset-4 border-2 border-dashed border-blue-200 rounded-[3rem] -z-10 animate-[spin_20s_linear_infinite]"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PROJECTS (nothing here yet) -->
     <section id="projects" class="section_padding px-6 bg-white reveal_div">
         <div class="max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
@@ -184,7 +159,6 @@
                     <h2 class="text-4xl font-black mb-2">Featured Projects</h2>
                     <div class="w-20 h-2 bg-blue-600 rounded-full"></div>
                 </div>
-                <p class="text-slate-500 font-medium">Latest explorations in security & code.</p>
             </div>
 
             <div class="py-24 flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-[3rem] bg-slate-50/50 hover:bg-blue-50/30 hover:border-blue-200 transition-all duration-500 group">
@@ -199,7 +173,6 @@
         </div>
     </section>
 
-    <!-- SKILLS -->
     <section id="skills" class="section_padding px-6 bg-slate-50 reveal_div">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-16">
@@ -207,21 +180,18 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- python card -->
                 <div class="skill_box_hover p-8 bg-white rounded-[2rem] shadow-sm flex flex-col items-center gap-4 border border-slate-100 group">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
                         <i data-lucide="terminal" class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors"></i>
                     </div>
                     <span class="font-bold text-xl">Python</span>
                 </div>
-                <!-- html card -->
                 <div class="skill_box_hover p-8 bg-white rounded-[2rem] shadow-sm flex flex-col items-center gap-4 border border-slate-100 group">
                     <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center group-hover:bg-orange-600 transition-colors duration-300">
                         <i data-lucide="code-2" class="w-8 h-8 text-orange-600 group-hover:text-white transition-colors"></i>
                     </div>
                     <span class="font-bold text-xl">HTML</span>
                 </div>
-                <!-- css card -->
                 <div class="skill_box_hover p-8 bg-white rounded-[2rem] shadow-sm flex flex-col items-center gap-4 border border-slate-100 group">
                     <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center group-hover:bg-blue-800 transition-colors duration-300">
                         <i data-lucide="palette" class="w-8 h-8 text-blue-800 group-hover:text-white transition-colors"></i>
@@ -232,15 +202,14 @@
         </div>
     </section>
 
-    <!-- CONTACT STUFF -->
     <section id="contact" class="section_padding px-6 bg-white reveal_div">
         <div class="max-w-4xl mx-auto glass_effect_v1 rounded-[3rem] p-10 md:p-20 shadow-[0_20px_50px_rgba(59,130,246,0.1)] border border-blue-50 text-center overflow-hidden relative">
             <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-100/50 rounded-full blur-3xl"></div>
             
             <h2 class="text-4xl md:text-5xl font-black mb-12 tracking-tight">Let's Connect</h2>
             
-            <div class="flex justify-center items-center">
-                <a href="mailto:sidney@sidneyf.com" class="shiny_btn flex items-center gap-4 text-slate-700 bg-white px-10 py-5 rounded-[2rem] border border-slate-100 shadow-lg hover:border-blue-200 transition-all">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                <a href="mailto:sidney@sidneyf.com" class="shiny_btn flex items-center gap-4 text-slate-700 bg-white px-10 py-5 rounded-[2rem] border border-slate-100 shadow-lg hover:border-blue-200 transition-all w-full md:w-auto">
                     <div class="p-4 bg-blue-50 rounded-2xl">
                         <i data-lucide="mail" class="w-8 h-8 text-blue-600"></i>
                     </div>
@@ -249,35 +218,39 @@
                         <span class="font-black text-xl md:text-2xl">sidney@sidneyf.com</span>
                     </div>
                 </a>
+                <a href="https://github.com/sidneyf388" target="_blank" class="shiny_btn flex items-center gap-4 text-slate-700 bg-white px-10 py-5 rounded-[2rem] border border-slate-100 shadow-lg hover:border-blue-200 transition-all w-full md:w-auto">
+                    <div class="p-4 bg-slate-900 rounded-2xl">
+                        <i data-lucide="github" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Follow Me</p>
+                        <span class="font-black text-xl md:text-2xl">GitHub Profile</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="py-12 border-t border-slate-100 text-center text-slate-500">
         <div class="max-w-6xl mx-auto px-6 flex justify-center items-center">
             <p class="font-medium">© <span id="the_current_year">2024</span> Sidney Fry</p>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT START - PRAY FOR NO ERRORS -->
     <script>
-        // run icons
         lucide.createIcons();
 
-        // get the date
         var date_thing = new Date();
         var y = date_thing.getFullYear();
         document.getElementById('the_current_year').textContent = y;
 
-        // this function makes things slide in when you scroll
         function do_the_scroll_reveal_stuff() {
             var all_the_divs = document.querySelectorAll(".reveal_div");
             
             for (var i = 0; i < all_the_divs.length; i++) {
                 var h = window.innerHeight;
                 var top = all_the_divs[i].getBoundingClientRect().top;
-                var limit = 150; // how much to wait
+                var limit = 150;
                 
                 if (top < h - limit) {
                     all_the_divs[i].classList.add("active");
@@ -285,36 +258,33 @@
             }
         }
 
-        // event listener for scrolling
         window.addEventListener("scroll", function() {
             do_the_scroll_reveal_stuff();
         });
 
-        // call it once so the top part shows up
         do_the_scroll_reveal_stuff();
 
-        // smooth scrolling for buttons
         var all_links = document.querySelectorAll('a[href^="#"]');
         all_links.forEach(function(item) {
             item.addEventListener('click', function (event) {
                 event.preventDefault();
                 var target_id = this.getAttribute('href');
-                var element = document.querySelector(target_id);
                 
-                if (element) {
-                    var offset = 80; // height of header
-                    var pos = element.getBoundingClientRect().top;
-                    var final_pos = pos + window.pageYOffset - offset;
-                    
-                    window.scrollTo({
-                        top: final_pos,
-                        behavior: 'smooth'
-                    });
+                if (target_id.startsWith("#")) {
+                    var element = document.querySelector(target_id);
+                    if (element) {
+                        var offset = 80;
+                        var pos = element.getBoundingClientRect().top;
+                        var final_pos = pos + window.pageYOffset - offset;
+                        
+                        window.scrollTo({
+                            top: final_pos,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
         });
-
-        console.log("Website loaded. Sidney Fry Portfolio.");
     </script>
 </body>
 </html>
