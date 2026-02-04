@@ -1,503 +1,320 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<!-- OK SO THIS IS MY WEBSITE - SIDNEY FRY - CS STUDENT -->
+<!-- i hope this works lol. i spent like 3 hours on this part -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidney Fry - Developer Portfolio</title>
-    <!-- Tailwind CSS -->
+    <title>Sidney's Website thingy</title>
+    <!-- tailwind thing my friend told me to use -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- icons from lucide or whatever it is called -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Custom CSS for animations and game */
+        /* CSS STUFF STARTS HERE - DONT TOUCH UNLESS IT BREAKS */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* slate-900 */
-            color: #e2e8f0; /* slate-200 */
+            font-family: 'Inter', sans-serif !important;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            background-color: #f8fafc; /* light gray ish */
         }
 
-        /* Animated Gradient Text */
-        .animated-gradient-text {
-            background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc, #f472b6, #38bdf8);
-            background-size: 400% 400%;
+        /* make the boxes look like glass? i think? */
+        .glass_effect_v1 {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* the blue dot background thing */
+        .dots_bg_final_final {
+            background-image: radial-gradient(#3b82f6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            background-position: center;
+            mask-image: linear-gradient(to bottom, white, transparent);
+        }
+
+        /* text with colors */
+        .cool_text_gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradient-flow 10s ease-in-out infinite;
         }
 
-        @keyframes gradient-flow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Page transition */
-        .page {
-            display: none; /* Hidden by default */
-            animation: fadeIn 0.5s ease-out;
-        }
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Project card hover */
-        .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Snake Game Canvas */
-        #snakeCanvas {
-            background-color: #1e293b; /* slate-800 */
-            border: 2px solid #334155; /* slate-700 */
-            border-radius: 8px;
-            width: 100%;
-            height: auto;
-            max-width: 600px;
-            aspect-ratio: 1 / 1;
+        /* photo moving up and down */
+        @keyframes floaty_thing {
+            0% { transform: translateY(0px) rotate(3deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(3deg); }
         }
         
-        /* Custom modal for messages */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+        /* apply the move thing */
+        .my_photo_animation {
+            animation: floaty_thing 5s ease-in-out infinite;
+        }
+
+        /* stuff appearing when scrolling down */
+        .reveal_div {
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .modal-overlay.active {
+        
+        /* this class gets added by javascript later i think */
+        .reveal_div.active {
             opacity: 1;
-            visibility: visible;
+            transform: translateY(0);
         }
-        .modal-content {
-            background: #1e293b; /* slate-800 */
-            padding: 2rem;
-            border-radius: 0.5rem;
-            text-align: center;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+
+        /* skill boxes */
+        .skill_box_hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
+        .skill_box_hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
         }
+
+        /* blue button glow */
+        .shiny_btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .shiny_btn:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        /* scrollbar looks weird so i found this code online */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* helper classes because i dont want to type tailwind every time */
+        .nav_fixed { position: fixed; top: 0; width: 100%; z-index: 50; }
+        .flex_center { display: flex; justify-content: center; align-items: center; }
+        .section_padding { padding-top: 6rem; padding-bottom: 6rem; }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="bg-slate-50 text-slate-900">
 
-    <!-- Header / Navigation -->
-    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-700">
-        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo / Name -->
-                <div class="flex-shrink-0">
-                    <span class="text-xl font-bold text-white">Sidney Fry</span>
-                </div>
-                <!-- Navigation Links -->
-                <div class="flex items-center space-x-4">
-                    <button class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" data-page="home">Home</button>
-                    <button class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" data-page="projects">Projects</button>
-                    <button class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white" data-page="snake">Snake Game</button>
-                </div>
+    <!-- NAVIGATION PART -->
+    <nav class="nav_fixed glass_effect_v1 border-b border-slate-200/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold cool_text_gradient tracking-tight">Sidney Fry</a>
+            <!-- Desktop menu stuff -->
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#home" class="hover:text-blue-600 transition-colors">Home</a>
+                <a href="#projects" class="hover:text-blue-600 transition-colors">Projects</a>
+                <a href="#skills" class="hover:text-blue-600 transition-colors">Skills</a>
+                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
             </div>
-        </nav>
-    </header>
+            <!-- this is for phones i guess -->
+            <div class="md:hidden">
+                <button onclick="console.log('menu clicked')"><i data-lucide="menu"></i></button>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-
-        <!-- Home Page Content -->
-        <section id="home-page" class="page active">
-            <!-- Hero Section -->
-            <div class="text-center py-16 md:py-24">
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-4">
-                    <span class="animated-gradient-text">Hello, I'm Sidney Fry.</span>
+    <!-- HEADER / HERO STUFF -->
+    <section id="home" class="relative pt-40 pb-24 px-6 overflow-hidden">
+        <!-- background colors and dots -->
+        <div class="absolute inset-0 dots_bg_final_final opacity-30"></div>
+        <div class="absolute top-20 -left-20 w-80 h-80 bg-blue-200/40 blur-[100px] rounded-full"></div>
+        <div class="absolute bottom-0 -right-20 w-80 h-80 bg-purple-200/40 blur-[100px] rounded-full"></div>
+        
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
+            <!-- left side text -->
+            <div class="flex-1 text-center md:text-left reveal_div">
+                <h1 class="text-5xl md:text-7xl font-black mb-6 leading-[1.1] tracking-tight text-slate-900">
+                    I'm <span class="cool_text_gradient">Sidney Fry</span>,<br>a CS Student.
                 </h1>
-                <p class="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto">
-                    A creative developer building modern, responsive, and engaging web experiences.
+                <p class="text-slate-600 text-lg md:text-xl mb-10 leading-relaxed max-w-xl font-medium">
+                    I am an aspiring Cyber Security professional currently studying Computer Science at the University of Leicester. I am passionate about securing digital infrastructures and building resilient systems.
                 </p>
-                <div class="mt-8 flex justify-center gap-4">
-                    <a href="#projects" class="nav-link bg-sky-500 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-sky-400 transition-all" data-page="projects">
-                        View My Work
+                <!-- buttons -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <a href="#projects" class="shiny_btn bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center gap-2 shadow-lg shadow-blue-200 hover:-translate-y-1 transition-all">
+                        View Projects <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </a>
-                    <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" class="bg-slate-700 text-slate-200 px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-slate-600 transition-all">
-                        GitHub
+                    <a href="#contact" class="px-8 py-4 rounded-2xl font-bold border border-slate-200 bg-white hover:bg-slate-50 transition-all text-slate-700">
+                        Get in Touch
                     </a>
                 </div>
             </div>
 
-            <!-- About Me Section -->
-            <div class="my-16 md:my-24 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-8">About Me</h2>
-                <p class="text-lg text-slate-400 text-center leading-relaxed">
-                    I'm a passionate programmer specializing in front-end and full-stack development. I love turning complex problems into simple, beautiful, and intuitive designs. When I'm not coding, you can find me exploring new technologies, contributing to open-source, or playing classic arcade games.
-                </p>
-            </div>
-
-            <!-- Projects Section -->
-            <div id="projects" class="my-16 md:my-24">
-                <h2 class="text-3xl font-bold text-center mb-12">My Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Project Card 1 -->
-                    <div class="project-card bg-slate-800 rounded-lg overflow-hidden shadow-xl border border-slate-700">
-                        <img src="https://placehold.co/600x400/1e293b/94a3b8?text=Project+1" alt="Project 1" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Project Title One</h3>
-                            <p class="text-slate-400 mb-4">A brief description of the project, its technologies, and its purpose.</p>
-                            <a href="#" class="text-sky-400 hover:text-sky-300 font-medium">View Project &rarr;</a>
-                        </div>
+            <!-- right side photo -->
+            <div class="flex-1 flex justify-center reveal_div">
+                <div class="relative">
+                    <div class="w-64 h-64 md:w-96 md:h-96 rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] my_photo_animation bg-white border-8 border-white">
+                        <!-- this link is really long i hope it doesnt break -->
+                        <img 
+                            src="https://lh3.googleusercontent.com/pw/AP1GczMdDlNoE242G2EF4xFZ43_ZoSDtoRn-3lLZF85eKDp6l-LFFOXOukFSISMCwEVS2fUjml8GePlDP13X_AFSbyxSW42mcxYhv-rrSgA0HMBG96U0gB9VpavkYJ8XX1ViERG7qMaYFWmq4Kl92cpYrXtEug=w1259-h945-s-no-gm" 
+                            alt="Sidney Fry Photo" 
+                            class="w-full h-full object-cover transition-all duration-700"
+                            onerror="console.log('photo error'); this.src='https://via.placeholder.com/400x400?text=Fix+The+Link'"
+                        >
                     </div>
-                    
-                    <!-- Project Card 2 -->
-                    <div class="project-card bg-slate-800 rounded-lg overflow-hidden shadow-xl border border-slate-700">
-                        <img src="https://placehold.co/600x400/1e293b/94a3b8?text=Project+2" alt="Project 2" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Project Title Two</h3>
-                            <p class="text-slate-400 mb-4">A brief description of the project, its technologies, and its purpose.</p>
-                            <a href="#" class="text-sky-400 hover:text-sky-300 font-medium">View Project &rarr;</a>
-                        </div>
-                    </div>
-
-                    <!-- Project Card 3 -->
-                    <div class="project-card bg-slate-800 rounded-lg overflow-hidden shadow-xl border border-slate-700">
-                        <img src="https://placehold.co/600x400/1e293b/94a3b8?text=Project+3" alt="Project 3" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Project Title Three</h3>
-                            <p class="text-slate-400 mb-4">A brief description of the project, its technologies, and its purpose.</p>
-                            <a href="#" class="text-sky-400 hover:text-sky-300 font-medium">View Project &rarr;</a>
-                        </div>
-                    </div>
-
+                    <!-- rotating dotty thing -->
+                    <div class="absolute -inset-4 border-2 border-dashed border-blue-200 rounded-[3rem] -z-10 animate-[spin_20s_linear_infinite]"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Snake Game Page Content -->
-        <section id="snake-game-page" class="page">
-            <h2 class="text-3xl font-bold text-center mb-4">Classic Snake Game</h2>
-            <p class="text-center text-slate-400 mb-4">Use Arrow Keys (or swipe on mobile) to move. Don't hit the walls or yourself!</p>
-            <div class="flex flex-col items-center">
-                <div id="score-display" class="text-2xl font-bold mb-4">Score: 0</div>
-                <canvas id="snakeCanvas"></canvas>
-                <button id="start-game-btn" class="mt-6 bg-green-500 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-green-400 transition-all">
-                    Start Game
-                </button>
+    <!-- PROJECTS (nothing here yet) -->
+    <section id="projects" class="section_padding px-6 bg-white reveal_div">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+                <div>
+                    <h2 class="text-4xl font-black mb-2">Featured Projects</h2>
+                    <div class="w-20 h-2 bg-blue-600 rounded-full"></div>
+                </div>
+                <p class="text-slate-500 font-medium">Latest explorations in security & code.</p>
             </div>
-        </section>
 
-    </main>
+            <div class="py-24 flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-[3rem] bg-slate-50/50 hover:bg-blue-50/30 hover:border-blue-200 transition-all duration-500 group">
+                <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-sm mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all">
+                    <i data-lucide="shield-check" class="w-10 h-10 text-blue-500"></i>
+                </div>
+                <h3 class="text-3xl font-black text-slate-800 mb-3 tracking-tight">Projects Coming Soon</h3>
+                <p class="text-slate-500 max-w-sm text-center font-medium leading-relaxed">
+                    I'm currently working on security-focused projects and scripts. Check back soon for my latest work.
+                </p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-700 mt-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-400">
-            <p>&copy; <span id="current-year"></span> Sidney Fry. All rights reserved.</p>
-            <!-- Add social links here -->
+    <!-- SKILLS -->
+    <section id="skills" class="section_padding px-6 bg-slate-50 reveal_div">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black">Core Skills</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- python card -->
+                <div class="skill_box_hover p-8 bg-white rounded-[2rem] shadow-sm flex flex-col items-center gap-4 border border-slate-100 group">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
+                        <i data-lucide="terminal" class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <span class="font-bold text-xl">Python</span>
+                </div>
+                <!-- html card -->
+                <div class="skill_box_hover p-8 bg-white rounded-[2rem] shadow-sm flex flex-col items-center gap-4 border border-slate-100 group">
+                    <div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center group-hover:bg-orange-600 transition-colors duration-300">
+                        <i data-lucide="code-2" class="w-8 h-8 text-orange-600 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <span class="font-bold text-xl">HTML</span>
+                </div>
+                <!-- css card -->
+                <div class="skill_box_hover p-8 bg-white rounded-[2rem] shadow-sm flex flex-col items-center gap-4 border border-slate-100 group">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center group-hover:bg-blue-800 transition-colors duration-300">
+                        <i data-lucide="palette" class="w-8 h-8 text-blue-800 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <span class="font-bold text-xl">CSS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT STUFF -->
+    <section id="contact" class="section_padding px-6 bg-white reveal_div">
+        <div class="max-w-4xl mx-auto glass_effect_v1 rounded-[3rem] p-10 md:p-20 shadow-[0_20px_50px_rgba(59,130,246,0.1)] border border-blue-50 text-center overflow-hidden relative">
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-100/50 rounded-full blur-3xl"></div>
+            
+            <h2 class="text-4xl md:text-5xl font-black mb-12 tracking-tight">Let's Connect</h2>
+            
+            <div class="flex justify-center items-center">
+                <a href="mailto:sidney@sidneyf.com" class="shiny_btn flex items-center gap-4 text-slate-700 bg-white px-10 py-5 rounded-[2rem] border border-slate-100 shadow-lg hover:border-blue-200 transition-all">
+                    <div class="p-4 bg-blue-50 rounded-2xl">
+                        <i data-lucide="mail" class="w-8 h-8 text-blue-600"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Email Me</p>
+                        <span class="font-black text-xl md:text-2xl">sidney@sidneyf.com</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-slate-100 text-center text-slate-500">
+        <div class="max-w-6xl mx-auto px-6 flex justify-center items-center">
+            <p class="font-medium">© <span id="the_current_year">2024</span> Sidney Fry</p>
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div id="message-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h3 id="modal-title" class="text-2xl font-bold mb-4">Game Over!</h3>
-            <p id="modal-score" class="text-lg mb-6">Your score: 0</p>
-            <button id="modal-restart-btn" class="bg-sky-500 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-sky-400 transition-all">
-                Play Again
-            </button>
-        </div>
-    </div>
-
-
+    <!-- JAVASCRIPT START - PRAY FOR NO ERRORS -->
     <script>
-        // --- Page Navigation ---
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pages = document.querySelectorAll('.page');
+        // run icons
+        lucide.createIcons();
 
-        function showPage(pageId) {
-            pages.forEach(page => {
-                if (page.id === `${pageId}-page` || (pageId === 'projects' && page.id === 'home-page')) {
-                    page.classList.add('active');
-                } else {
-                    page.classList.remove('active');
+        // get the date
+        var date_thing = new Date();
+        var y = date_thing.getFullYear();
+        document.getElementById('the_current_year').textContent = y;
+
+        // this function makes things slide in when you scroll
+        function do_the_scroll_reveal_stuff() {
+            var all_the_divs = document.querySelectorAll(".reveal_div");
+            
+            for (var i = 0; i < all_the_divs.length; i++) {
+                var h = window.innerHeight;
+                var top = all_the_divs[i].getBoundingClientRect().top;
+                var limit = 150; // how much to wait
+                
+                if (top < h - limit) {
+                    all_the_divs[i].classList.add("active");
+                }
+            }
+        }
+
+        // event listener for scrolling
+        window.addEventListener("scroll", function() {
+            do_the_scroll_reveal_stuff();
+        });
+
+        // call it once so the top part shows up
+        do_the_scroll_reveal_stuff();
+
+        // smooth scrolling for buttons
+        var all_links = document.querySelectorAll('a[href^="#"]');
+        all_links.forEach(function(item) {
+            item.addEventListener('click', function (event) {
+                event.preventDefault();
+                var target_id = this.getAttribute('href');
+                var element = document.querySelector(target_id);
+                
+                if (element) {
+                    var offset = 80; // height of header
+                    var pos = element.getBoundingClientRect().top;
+                    var final_pos = pos + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: final_pos,
+                        behavior: 'smooth'
+                    });
                 }
             });
-            
-            // Special handling for projects link to scroll
-            if (pageId === 'projects') {
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const pageId = link.getAttribute('data-page');
-                showPage(pageId);
-            });
         });
 
-        // Set initial page (home)
-        showPage('home');
-        
-        // Update footer year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // --- Snake Game ---
-        const canvas = document.getElementById('snakeCanvas');
-        const ctx = canvas.getContext('2d');
-        const scoreDisplay = document.getElementById('score-display');
-        const startButton = document.getElementById('start-game-btn');
-        
-        // Modal elements
-        const modal = document.getElementById('message-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalScore = document.getElementById('modal-score');
-        const restartButton = document.getElementById('modal-restart-btn');
-
-        let box = 20; // Size of each grid cell
-        let canvasSize = 600; // Will be set dynamically
-        let snake;
-        let food;
-        let score;
-        let direction;
-        let game; // Game loop interval
-        let changingDirection = false;
-        
-        // Touch controls
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let touchEndX = 0;
-        let touchEndY = 0;
-
-        function resizeCanvas() {
-            // Get the width of the container
-            const containerWidth = canvas.parentElement.clientWidth;
-            // Set canvas size to be a multiple of the box size
-            canvasSize = Math.floor(containerWidth / box) * box;
-            // Ensure max width
-            canvasSize = Math.min(canvasSize, 600);
-            
-            canvas.width = canvasSize;
-            canvas.height = canvasSize;
-            
-            // Recalculate box if needed, or just let the grid be larger
-            // For simplicity, we'll keep `box` constant and just have more/fewer boxes
-        }
-        
-        function init() {
-            resizeCanvas(); // Set initial size
-            
-            snake = [];
-            snake[0] = { x: Math.floor((canvas.width / box) / 2) * box, y: Math.floor((canvas.height / box) / 2) * box };
-
-            createFood();
-
-            score = 0;
-            scoreDisplay.textContent = `Score: ${score}`;
-            direction = null;
-            changingDirection = false;
-
-            if (game) {
-                clearInterval(game);
-            }
-            draw(); // Initial draw
-        }
-
-        function createFood() {
-            food = {
-                x: Math.floor(Math.random() * (canvas.width / box)) * box,
-                y: Math.floor(Math.random() * (canvas.height / box)) * box
-            };
-            // Ensure food doesn't spawn on the snake
-            for (let i = 0; i < snake.length; i++) {
-                if (food.x === snake[i].x && food.y === snake[i].y) {
-                    createFood();
-                    break;
-                }
-            }
-        }
-
-        function draw() {
-            if (!ctx) return;
-            // Clear canvas
-            ctx.fillStyle = "#1e293b"; // slate-800
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Draw snake
-            for (let i = 0; i < snake.length; i++) {
-                ctx.fillStyle = (i === 0) ? "#38bdf8" : "#818cf8"; // Head and body color
-                ctx.fillRect(snake[i].x, snake[i].y, box, box);
-                ctx.strokeStyle = "#1e293b";
-                ctx.strokeRect(snake[i].x, snake[i].y, box, box);
-            }
-
-            // Draw food
-            ctx.fillStyle = "#f472b6"; // Pink food
-            ctx.fillRect(food.x, food.y, box, box);
-        }
-        
-        function mainLoop() {
-            changingDirection = false; // Allow next direction change
-
-            let snakeX = snake[0].x;
-            let snakeY = snake[0].y;
-
-            if (direction === "LEFT") snakeX -= box;
-            if (direction === "UP") snakeY -= box;
-            if (direction === "RIGHT") snakeX += box;
-            if (direction === "DOWN") snakeY += box;
-
-            // Check for game over conditions
-            if (
-                snakeX < 0 ||
-                snakeY < 0 ||
-                snakeX >= canvas.width ||
-                snakeY >= canvas.height ||
-                collision(snakeX, snakeY, snake)
-            ) {
-                clearInterval(game);
-                showModal("Game Over!", score);
-                return;
-            }
-
-            // Check for food
-            if (snakeX === food.x && snakeY === food.y) {
-                score++;
-                scoreDisplay.textContent = `Score: ${score}`;
-                createFood();
-            } else {
-                // Remove tail
-                snake.pop();
-            }
-
-            // Add new head
-            let newHead = { x: snakeX, y: snakeY };
-            snake.unshift(newHead);
-
-            draw();
-        }
-
-        function collision(x, y, array) {
-            for (let i = 0; i < array.length; i++) {
-                if (x === array[i].x && y === array[i].y) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        function setDirection(e) {
-            if (changingDirection) return; // Prevent rapid 180 turns
-            changingDirection = true;
-            
-            const key = e.keyCode;
-            if (key === 37 && direction !== "RIGHT") { // Left
-                direction = "LEFT";
-            } else if (key === 38 && direction !== "DOWN") { // Up
-                direction = "UP";
-            } else if (key === 39 && direction !== "LEFT") { // Right
-                direction = "RIGHT";
-            } else if (key === 40 && direction !== "UP") { // Down
-                direction = "DOWN";
-            }
-        }
-        
-        // --- Touch Controls ---
-        function handleTouchStart(e) {
-            e.preventDefault();
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-        }
-
-        function handleTouchMove(e) {
-            e.preventDefault();
-            if (!touchStartX || !touchStartY) return;
-
-            touchEndX = e.touches[0].clientX;
-            touchEndY = e.touches[0].clientY;
-
-            let dx = touchEndX - touchStartX;
-            let dy = touchEndY - touchStartY;
-
-            // Determine swipe direction
-            if (Math.abs(dx) > Math.abs(dy)) {
-                // Horizontal swipe
-                if (dx > 0 && direction !== "LEFT") {
-                    direction = "RIGHT";
-                } else if (dx < 0 && direction !== "RIGHT") {
-                    direction = "LEFT";
-                }
-            } else {
-                // Vertical swipe
-                if (dy > 0 && direction !== "UP") {
-                    direction = "DOWN";
-                } else if (dy < 0 && direction !== "DOWN") {
-                    direction = "UP";
-                }
-            }
-            
-            // Reset start points to avoid continuous small movements
-            touchStartX = 0;
-            touchStartY = 0;
-            changingDirection = true; // Mark as direction changed
-        }
-        
-        // --- Modal ---
-        function showModal(title, finalScore) {
-            modalTitle.textContent = title;
-            modalScore.textContent = `Your score: ${finalScore}`;
-            modal.classList.add('active');
-        }
-
-        function hideModal() {
-            modal.classList.remove('active');
-        }
-
-        // --- Event Listeners ---
-        document.addEventListener("keydown", setDirection);
-        
-        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-
-        startButton.addEventListener('click', () => {
-            init();
-            if (game) clearInterval(game);
-            game = setInterval(mainLoop, 100); // Start game loop
-            startButton.textContent = "Restart Game"; // Change button text
-        });
-
-        restartButton.addEventListener('click', () => {
-            hideModal();
-            init();
-            if (game) clearInterval(game);
-            game = setInterval(mainLoop, 100); // Start game loop
-        });
-        
-        window.addEventListener('resize', init); // Re-init on resize
-
-        // Initialize the game state (but don't start it)
-        init();
-        
+        console.log("Website loaded. Sidney Fry Portfolio.");
     </script>
-
 </body>
 </html>
